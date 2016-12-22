@@ -54,8 +54,9 @@ http.createServer(
                 if(err) throw err;
                 res.statusCode = 404;
                 res.end('This is for another purpose');
+                writeCommand("0\n");
             }
-        )
+        );
     }
 ).listen(port);
 
