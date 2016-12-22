@@ -14,4 +14,4 @@ config.commandMap = {
     "repo2": "2\n"
 };
 
-module_exports = config;
+module.exports = config;
