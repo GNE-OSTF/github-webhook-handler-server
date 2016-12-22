@@ -1,0 +1,22 @@
+{
+  "name": "github-webhook-handler-server",
+  "version": "1.0.0",
+  "description": "Node Server which is using the github-webhook-handler to pull the latest pushes for production.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JhonnyJason/github-webhook-handler-server.git"
+  },
+  "author": "Lenard Frommelt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JhonnyJason/github-webhook-handler-server/issues"
+  },
+  "homepage": "https://github.com/JhonnyJason/github-webhook-handler-server#readme",
+  "dependencies": {
+    "github-webhook-handler": "0.6.0"
+  }
+}
