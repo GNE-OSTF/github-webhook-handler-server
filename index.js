@@ -1,19 +1,28 @@
 /**
  * Created by lenny on 20.12.16.
  */
+
+
 var http = require('http');
 var fs = require('fs');
 var createHandler = require('github-webhook-handler');
+var config = require("./default-config");
+try{
+    config = require("./config");
+} catch(ex) {
+    console.log("caught: " + ex);
+    console.log("This most likely means that you do not have a real config.js file");
+}
 
-var handler = createHandler({ path: '/webhook', secret: 'secrettosubstitute' });
+
+
+var handler = createHandler({ path: '/webhook', secret: config.secret });
 var openSocket = null;
-var socketPath = "/run/commander.sk";
 
-var commandMap = {
-    "repo1": "1\n",
-    "repo2": "2\n"
-    //...
-};
+var socketPath = config.socketPath;
+var refToActOn = config.refToActOn;
+var commandMap = config.commandMap;
+var port = config.port;
 
 fs.open(
     socketPath,
@@ -23,6 +32,13 @@ fs.open(
         openSocket = fd;
     }
 );
+
+
+
+
+
+
+
 
 http.createServer(
     //handle regular requests by returning 404
@@ -37,7 +53,7 @@ http.createServer(
             }
         )
     }
-).listen(65530);
+).listen(port);
 
 
 
@@ -51,7 +67,7 @@ handler.on(
 
         console.log('Received a push event for %s to %s', repo, ref);
 
-        if((ref == "refs/heads/master") && command) {
+        if((ref == refToActOn) && command) {
             console.log("So we write Command: " + command);
             writeCommand(command);
         }
