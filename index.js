@@ -65,34 +65,12 @@ handler.on(
         var ref = event.payload.ref;
         var command = commandMap[repo];
 
-        console.log('Received a push event for %s to %s', repo, ref);
+        console.log('Received a push event for ' + repo + ' to ' + ref);
 
         if((ref == refToActOn) && command) {
             console.log("So we write Command: " + command);
             writeCommand(command);
         }
-    }
-);
-
-
-handler.on(
-    //handle github error events - we never will receive this
-    'error',
-    function (err) {
-        console.error('Error:', err.message);
-    }
-);
-
-
-handler.on(
-    //handle github new issue events - we never will receive this
-    'issues',
-    function (event) {
-        console.log('Received an issue event for %s action=%s: #%d %s',
-            event.payload.repository.name,
-            event.payload.action,
-            event.payload.issue.number,
-            event.payload.issue.title);
     }
 );
 
