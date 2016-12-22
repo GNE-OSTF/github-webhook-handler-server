@@ -9,6 +9,12 @@ var handler = createHandler({ path: '/webhook', secret: 'secrettosubstitute' });
 var openSocket = null;
 var socketPath = "/run/commander.sk";
 
+var commandMap = {
+    "repo1": "1\n",
+    "repo2": "2\n"
+    //...
+};
+
 fs.open(
     socketPath,
     'a',
@@ -42,6 +48,8 @@ handler.on(
         console.log('Received a push event for %s to %s',
             event.payload.repository.name,
             event.payload.ref);
+
+        writeCommand(commandMap[event.payload.repository.name]);
     }
 );
 
