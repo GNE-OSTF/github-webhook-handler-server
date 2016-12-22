@@ -14,15 +14,19 @@ try{
     console.log("This most likely means that you do not have a real config.js file");
 }
 
+console.log("check config before we start: ");
+console.log(JSON.stringify(config));
 
 
 var handler = createHandler({ path: '/webhook', secret: config.secret });
-var openSocket = null;
-
 var socketPath = config.socketPath;
+
 var refToActOn = config.refToActOn;
 var commandMap = config.commandMap;
 var port = config.port;
+
+var openSocket = null;
+
 
 fs.open(
     socketPath,
