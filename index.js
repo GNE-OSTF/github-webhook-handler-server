@@ -45,11 +45,16 @@ handler.on(
     //handle the github push events - so we write commands to pull and redeploy the corresponding project
     'push',
     function (event) {
-        console.log('Received a push event for %s to %s',
-            event.payload.repository.name,
-            event.payload.ref);
+        var repo = event.payload.repository.name;
+        var ref = event.payload.ref;
+        var command = commandMap[repo];
 
-        writeCommand(commandMap[event.payload.repository.name]);
+        console.log('Received a push event for %s to %s', repo, ref);
+
+        if((ref == "refs/heads/master") && command) {
+            console.log("So we write Command: " + command);
+            writeCommand(command);
+        }
     }
 );
 
