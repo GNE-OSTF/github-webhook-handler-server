@@ -47,8 +47,8 @@ fs.open(
 http.createServer(
     //handle regular requests by returning 404
     function (req, res) {
-        console.log("received request:");
-        console.log(req);
+        //console.log("received request:");
+        //console.log(req);
         handler(
             req,
             res,
