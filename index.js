@@ -39,11 +39,6 @@ fs.open(
 
 
 
-
-
-
-
-
 http.createServer(
     //handle regular requests by returning 404
     function (req, res) {
